@@ -1,2 +1,0 @@
-./gradlew bootJar
-java -jar ./build/libs/klgback-1.0-SNAPSHOT.jar
