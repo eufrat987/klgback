@@ -1,7 +1,6 @@
 plugins {
+    id("org.springframework.boot") version "3.2.3"
     id("java")
-//    id("org.springframework.boot") version "3.2.3"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 
@@ -25,6 +24,3 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.jar {
-    manifest.attributes["Main-Class"] = "klg.backend.lukasz.Main"
-}
