@@ -1,10 +1,9 @@
 package klg.backend.lukasz.repository;
 
-import klg.backend.lukasz.examples.Customer;
 import klg.backend.lukasz.model.Landlord;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LandlordRepository extends CrudRepository<Landlord, Long> {
+public interface LandlordRepository extends ListCrudRepository<Landlord, Long> { //todo list
 }
