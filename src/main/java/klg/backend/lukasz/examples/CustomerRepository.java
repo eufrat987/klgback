@@ -1,4 +1,4 @@
-package klg.backend.lukasz;
+package klg.backend.lukasz.examples;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

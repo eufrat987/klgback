@@ -1,17 +1,15 @@
-package klg.backend.lukasz;
+package klg.backend.lukasz.model;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-
 import lombok.NonNull;
-
+import lombok.RequiredArgsConstructor;
 
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
-@Table(name = "customers", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
-public class Customer {
+@Table(name = "property")
+public class Property {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,6 +21,14 @@ public class Customer {
 
     @NonNull
     @Column(nullable = false)
-    private String email;
+    private double unitPrice;
+
+    @NonNull
+    @Column(nullable = false)
+    private double surface;
+
+    @NonNull
+    @Column(nullable = false)
+    private String description; //todo check
 
 }
