@@ -51,15 +51,13 @@ public class ReservationController {
     @PutMapping("/{id}")
     ResponseEntity<Reservation> updateReservation(@PathVariable("id") long id, @RequestBody Reservation reservation) { //todo page?
         Optional<Reservation> reservationOptional = reservationRepository.findById(id);
-        if (reservationOptional.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-
         Optional<Landlord> landlordOptional = Optional.empty();
         Optional<Tenant> tenantOptional = Optional.empty();
         Optional<Property> propertyOptional = Optional.empty();
 
+        if (reservationOptional.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         if (reservation.getLandlord() != null) {
             landlordOptional = landlordRepository.findById(reservation.getLandlord().getId());
         }
@@ -71,11 +69,9 @@ public class ReservationController {
         }
 
         Reservation reservationInDB = reservationOptional.get();
-
         landlordOptional.ifPresent(reservationInDB::setLandlord);
         tenantOptional.ifPresent(reservationInDB::setTenant);
         propertyOptional.ifPresent(reservationInDB::setProperty);
-
         reservationInDB.setCost(reservation.getCost());
         reservationInDB.setRentStart(reservation.getRentStart());
         reservationInDB.setRentEnd(reservation.getRentEnd());

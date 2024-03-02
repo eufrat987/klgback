@@ -1,9 +1,10 @@
 package klg.backend.lukasz.controller;
 
-import klg.backend.lukasz.model.Landlord;
 import klg.backend.lukasz.model.Property;
 import klg.backend.lukasz.repository.PropertyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,13 +17,13 @@ public class PropertyController {
     PropertyRepository propertyRepository;
 
     @GetMapping
-    List<Property> getProperties() {
-        return propertyRepository.findAll();
+    ResponseEntity<List<Property>> getProperties() {
+        return new ResponseEntity<>(propertyRepository.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
-    Property createProperty(@RequestBody Property property) {
-        return propertyRepository.save(property);
+    ResponseEntity<Property> createProperty(@RequestBody Property property) {
+        return new ResponseEntity<>(propertyRepository.save(property), HttpStatus.OK);
     }
 
 }

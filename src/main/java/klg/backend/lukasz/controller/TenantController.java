@@ -3,6 +3,8 @@ package klg.backend.lukasz.controller;
 import klg.backend.lukasz.model.Tenant;
 import klg.backend.lukasz.repository.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,13 +17,13 @@ public class TenantController {
     TenantRepository tenantRepository;
 
     @GetMapping
-    List<Tenant> getTenants() {
-        return tenantRepository.findAll();
+    ResponseEntity<List<Tenant>> getTenants() {
+        return new ResponseEntity<>(tenantRepository.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
-    Tenant createProperty(@RequestBody Tenant tenant) {
-        return tenantRepository.save(tenant);
+    ResponseEntity<Tenant> createProperty(@RequestBody Tenant tenant) {
+        return new ResponseEntity<>(tenantRepository.save(tenant), HttpStatus.OK);
     }
 
 }
