@@ -24,10 +24,7 @@ public class LandlordController {
 
     @GetMapping("/{id}/reservations")
     ResponseEntity<List<Reservation>> getLandlordReservations(@PathVariable("id") long id) {
-        return landlordService.getLandlordReservations(id)
-                .map(reservations -> new ResponseEntity<>(reservations, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-
+        return new ResponseEntity<>(landlordService.getLandlordReservations(id), HttpStatus.OK);
     }
 
     @PostMapping

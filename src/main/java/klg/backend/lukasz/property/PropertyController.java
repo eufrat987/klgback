@@ -22,9 +22,7 @@ public class PropertyController {
 
     @GetMapping("/{id}/reservations")
     ResponseEntity<List<Reservation>> getLandlordReservations(@PathVariable("id") long id) {
-        return propertyService.getPropertyReservations(id)
-                .map(reservations -> new ResponseEntity<>(reservations, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return new ResponseEntity<>(propertyService.getPropertyReservations(id), HttpStatus.OK);
 
     }
 

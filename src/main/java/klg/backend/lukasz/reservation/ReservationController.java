@@ -26,9 +26,7 @@ public class ReservationController {
 
     @PutMapping("/{id}") //todo page?
     ResponseEntity<Reservation> updateReservation(@PathVariable("id") long id, @RequestBody Reservation reservation) {
-        return reservationService.updateReservation(id, reservation)
-                .map(updatedReservation -> new ResponseEntity<>(updatedReservation, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return new ResponseEntity<>(reservationService.updateReservation(id, reservation), HttpStatus.OK);
     }
 
 }

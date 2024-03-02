@@ -1,5 +1,6 @@
 package klg.backend.lukasz.landlord;
 
+import jakarta.persistence.EntityNotFoundException;
 import klg.backend.lukasz.reservation.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,10 @@ public class LandlordService {
         return landlordRepository.findAll();
     }
 
-    public Optional<List<Reservation>> getLandlordReservations(long id) {
-        return landlordRepository.findById(id).map(Landlord::getReservations);
+    public List<Reservation> getLandlordReservations(long id) {
+        return landlordRepository.findById(id)
+                .map(Landlord::getReservations)
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     public Landlord createLandlord(Landlord landlord) {
