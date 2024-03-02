@@ -1,7 +1,5 @@
 package klg.backend.lukasz.repository;
 
-import klg.backend.lukasz.examples.Customer;
-import klg.backend.lukasz.examples.CustomerRepository;
 import klg.backend.lukasz.model.Landlord;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
