@@ -2,11 +2,11 @@ package klg.backend.lukasz.landlord;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import klg.backend.lukasz.property.Property;
 import klg.backend.lukasz.reservation.Reservation;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class Landlord { //todo join with tenant? index?
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NonNull
+    @NotNull
     @Column(nullable = false)
     private String name;
 

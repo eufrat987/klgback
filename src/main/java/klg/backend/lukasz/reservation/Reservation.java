@@ -2,12 +2,12 @@ package klg.backend.lukasz.reservation;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import klg.backend.lukasz.landlord.Landlord;
-import klg.backend.lukasz.tenant.Tenant;
 import klg.backend.lukasz.property.Property;
+import klg.backend.lukasz.tenant.Tenant;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
@@ -23,19 +23,19 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NonNull
+    @NotNull
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern="dd-MM-yyyy")
     @Column(nullable = false, name = "rent_start")
     private LocalDate rentStart;
 
-    @NonNull
+    @NotNull
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern="dd-MM-yyyy")
     @Column(nullable = false, name = "rent_end")
     private LocalDate rentEnd;
 
-    @NonNull
+    @NotNull
     @Column(nullable = false)
     private Double cost;
 
