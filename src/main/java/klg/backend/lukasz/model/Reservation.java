@@ -30,6 +30,10 @@ public class Reservation {
     private Landlord landlord;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "property_id", nullable = false)
+    private Property property;
+
+    @ManyToOne(optional = false)
     @JoinColumn(name = "tenant_id", nullable = false) //todo can be in tenant diff?
     private Tenant tenant;
 

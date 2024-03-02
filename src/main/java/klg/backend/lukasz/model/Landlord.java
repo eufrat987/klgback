@@ -29,4 +29,8 @@ public class Landlord { //todo join with tenant?
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "landlord")
     private List<Reservation> reservations = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "landlord")
+    private List<Property> properties = new ArrayList<>();
+
 }

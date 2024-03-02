@@ -1,10 +1,14 @@
 package klg.backend.lukasz.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -32,5 +36,14 @@ public class Property {
     @NonNull
     @Column(nullable = false)
     private String description; //todo check
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "landlord_id", nullable = false)
+    private Landlord landlord;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "property")
+    private List<Reservation> reservations = new ArrayList<>();
+
 
 }
