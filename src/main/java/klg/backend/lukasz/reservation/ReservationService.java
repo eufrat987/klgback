@@ -6,6 +6,7 @@ import klg.backend.lukasz.tenant.Tenant;
 import klg.backend.lukasz.landlord.LandlordRepository;
 import klg.backend.lukasz.property.PropertyRepository;
 import klg.backend.lukasz.tenant.TenantRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class ReservationService {
 
     @Autowired
@@ -26,10 +28,14 @@ public class ReservationService {
     PropertyRepository propertyRepository;
 
     public List<Reservation> getReservations() {
-        return reservationRepository.findAll();
+        log.info("ReservationService:getReservations started.");
+        List<Reservation> reservations = reservationRepository.findAll();
+        log.info("ReservationService:getReservations ended.");
+        return reservations;
     }
 
     public Reservation createReservation(@RequestBody Reservation reservation) {
+        log.info("ReservationService:createReservation started.");
         Optional<Landlord> landlordOptional = landlordRepository.findById(reservation.getLandlord().getId());
         Optional<Tenant> tenantOptional = tenantRepository.findById(reservation.getTenant().getId());
         Optional<Property> propertyOptional = propertyRepository.findById(reservation.getId());
@@ -38,10 +44,13 @@ public class ReservationService {
         tenantOptional.ifPresent(reservation::setTenant);
         propertyOptional.ifPresent(reservation::setProperty);
 
-        return reservationRepository.save(reservation);
+        Reservation savedReservation = reservationRepository.save(reservation);
+        log.info("ReservationService:getReservations ended.");
+        return savedReservation;
     }
 
     public Optional<Reservation> updateReservation(long id, Reservation reservation) {
+        log.info("ReservationService:updateReservation started.");
         Optional<Reservation> reservationOptional = reservationRepository.findById(id);
         Optional<Landlord> landlordOptional = Optional.empty();
         Optional<Tenant> tenantOptional = Optional.empty();
@@ -68,7 +77,9 @@ public class ReservationService {
         reservationInDB.setRentStart(reservation.getRentStart());
         reservationInDB.setRentEnd(reservation.getRentEnd());
 
-        return Optional.of(reservationRepository.save(reservationInDB));
+        Optional<Reservation> optionalSaved = Optional.of(reservationRepository.save(reservationInDB));
+        log.info("ReservationService:updateReservation ended.");
+        return optionalSaved;
     }
 
 }

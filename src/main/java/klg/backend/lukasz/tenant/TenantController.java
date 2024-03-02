@@ -21,7 +21,7 @@ public class TenantController {
 
     @PostMapping
     ResponseEntity<Tenant> createProperty(@RequestBody Tenant tenant) {
-        return new ResponseEntity<>(tenantService.createProperty(tenant), HttpStatus.OK);
+        return new ResponseEntity<>(tenantService.createTenant(tenant), HttpStatus.OK);
     }
 
 }
