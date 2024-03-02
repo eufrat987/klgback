@@ -18,7 +18,7 @@ public class Reservation {
     private long id;
 
     @NonNull
-    @Column(nullable = false)
+    @Column(nullable = false, name = "rental_period")
     private Integer rentalPeriod; //todo change
 
     @NonNull
@@ -30,7 +30,14 @@ public class Reservation {
     private Landlord landlord;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tenant_id", nullable = false)
+    @JoinColumn(name = "tenant_id", nullable = false) //todo can be in tenant diff?
     private Tenant tenant;
 
+    /*
+
+    – With @OneToMany, we cannot limit the size of that collection, for example, in case of pagination.
+    – With @ManyToOne, you can modify the Repository:
+        to work with Pagination
+        or to sort/order by multiple fields
+     */
 }

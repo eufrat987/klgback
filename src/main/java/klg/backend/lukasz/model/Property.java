@@ -22,7 +22,7 @@ public class Property {
     private String name;
 
     @NonNull
-    @Column(nullable = false)
+    @Column(nullable = false, name = "unit_price")
     private Double unitPrice;
 
     @NonNull

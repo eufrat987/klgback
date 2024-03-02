@@ -1,5 +1,6 @@
 package klg.backend.lukasz.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,14 +19,13 @@ public class Tenant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "tenant_id")
     private long id;
 
     @NonNull
     @Column(nullable = false)
     private String name;
 
-    @NonNull
+    @JsonIgnore
     @OneToMany(mappedBy = "tenant")
     private Set<Reservation> reservations = new HashSet<>();
 
