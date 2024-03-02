@@ -1,6 +1,5 @@
-package klg.backend.lukasz.repository;
+package klg.backend.lukasz;
 
-import klg.backend.lukasz.landlord.Landlord;
 import klg.backend.lukasz.landlord.LandlordRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+
 @DataJpaTest
 public class LandlordRepositoryTest {
 
@@ -19,15 +19,14 @@ public class LandlordRepositoryTest {
 
     @Test
     public void whenFindingCustomerById_thenCorrect() {
-        landlordRepository.save(new Landlord("John Smith"));
         assertThat(landlordRepository.findById(1L)).isInstanceOf(Optional.class);
+        assertThat(landlordRepository.findById(1L).isPresent()).isEqualTo(true);
     }
 
     @Test
     public void whenFindingAllCustomers_thenCorrect() {
-        landlordRepository.save(new Landlord("John Smith"));
-        landlordRepository.save(new Landlord("Juile Smith"));
         assertThat(landlordRepository.findAll()).isInstanceOf(List.class);
+        assertThat(landlordRepository.findAll().size()).isEqualTo(2);
     }
 
 }

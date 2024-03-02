@@ -1,8 +1,7 @@
 package klg.backend.lukasz.reservation;
 
-import klg.backend.lukasz.landlord.Landlord;
-import klg.backend.lukasz.property.Property;
-import klg.backend.lukasz.tenant.Tenant;
+import jakarta.persistence.EntityNotFoundException;
+import klg.backend.lukasz.exception.ReservationRequestException;
 import klg.backend.lukasz.landlord.LandlordRepository;
 import klg.backend.lukasz.property.PropertyRepository;
 import klg.backend.lukasz.tenant.TenantRepository;
@@ -13,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ReservationService {
@@ -33,46 +31,46 @@ public class ReservationService {
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
     public Reservation createReservation(@RequestBody Reservation reservation) {
-        Optional<Landlord> landlordOptional = landlordRepository.findById(reservation.getLandlord().getId());
-        Optional<Tenant> tenantOptional = tenantRepository.findById(reservation.getTenant().getId());
-        Optional<Property> propertyOptional = propertyRepository.findById(reservation.getId());
-
-        landlordOptional.ifPresent(reservation::setLandlord);
-        tenantOptional.ifPresent(reservation::setTenant);
-        propertyOptional.ifPresent(reservation::setProperty);
-
+        setForeignKeys(reservation, reservation);
         return reservationRepository.save(reservation);
     }
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    public Optional<Reservation> updateReservation(long id, Reservation reservation) {
-        Optional<Reservation> reservationOptional = reservationRepository.findById(id);
-        Optional<Landlord> landlordOptional = Optional.empty();
-        Optional<Tenant> tenantOptional = Optional.empty();
-        Optional<Property> propertyOptional = Optional.empty();
+    public Reservation updateReservation(long id, Reservation reservation) {
+        validate(reservation);
+        Reservation reservationInDB = reservationRepository.findById(id)
+                .orElseThrow(EntityNotFoundException::new);
 
-        if (reservationOptional.isEmpty()) {
-            return Optional.empty();
-        }
-        if (reservation.getLandlord() != null) {
-            landlordOptional = landlordRepository.findById(reservation.getLandlord().getId());
-        }
-        if (reservation.getLandlord() != null) {
-            tenantOptional = tenantRepository.findById(reservation.getTenant().getId());
-        }
-        if (reservation.getLandlord() != null) {
-            propertyOptional = propertyRepository.findById(reservation.getId());
-        }
-
-        Reservation reservationInDB = reservationOptional.get();
-        landlordOptional.ifPresent(reservationInDB::setLandlord);
-        tenantOptional.ifPresent(reservationInDB::setTenant);
-        propertyOptional.ifPresent(reservationInDB::setProperty);
+        setForeignKeys(reservation, reservationInDB);
         reservationInDB.setCost(reservation.getCost());
         reservationInDB.setRentStart(reservation.getRentStart());
         reservationInDB.setRentEnd(reservation.getRentEnd());
 
-        return Optional.of(reservationRepository.save(reservationInDB));
+        return reservationRepository.save(reservationInDB);
+    }
+
+    private void validate(Reservation reservation) {
+        if (!reservation.getRentStart().isBefore(reservation.getRentEnd())) {
+            throw new ReservationRequestException("rentStart after rentEnd");
+        }
+    }
+
+    private void setForeignKeys(Reservation newReservation, Reservation reservationInDB) {
+        if (newReservation.getLandlord() != null) {
+            var landlord = landlordRepository.findById(newReservation.getLandlord().getId())
+                    .orElseThrow(EntityNotFoundException::new);
+            reservationInDB.setLandlord(landlord);
+        }
+        if (newReservation.getTenant() != null) {
+            var tenant = tenantRepository.findById(newReservation.getTenant().getId())
+                    .orElseThrow(EntityNotFoundException::new);
+            reservationInDB.setTenant(tenant);
+        }
+        if (newReservation.getProperty() != null) {
+            var property = propertyRepository.findById(newReservation.getProperty().getId())
+                    .orElseThrow(EntityNotFoundException::new);
+            reservationInDB.setProperty(property);
+        }
     }
 
 }
