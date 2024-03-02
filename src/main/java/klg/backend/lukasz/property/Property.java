@@ -2,12 +2,11 @@ package klg.backend.lukasz.property;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import klg.backend.lukasz.landlord.Landlord;
 import klg.backend.lukasz.reservation.Reservation;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
@@ -24,21 +23,20 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
+    @NonNull
     @Column(nullable = false)
     private String name;
 
-    @NotNull
+    @NonNull
     @Column(nullable = false, name = "unit_price")
     private Double unitPrice;
 
-    @NotNull
+    @NonNull
     @Column(nullable = false)
     private Integer surface;
 
-    @NotNull
+    @NonNull
     @Lob
-    @NotBlank
     @Column(nullable = false)
     private String description;
 
