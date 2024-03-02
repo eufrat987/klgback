@@ -8,6 +8,8 @@ import klg.backend.lukasz.property.PropertyRepository;
 import klg.backend.lukasz.tenant.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -29,6 +31,7 @@ public class ReservationService {
         return reservationRepository.findAll();
     }
 
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public Reservation createReservation(@RequestBody Reservation reservation) {
         Optional<Landlord> landlordOptional = landlordRepository.findById(reservation.getLandlord().getId());
         Optional<Tenant> tenantOptional = tenantRepository.findById(reservation.getTenant().getId());
@@ -41,6 +44,7 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public Optional<Reservation> updateReservation(long id, Reservation reservation) {
         Optional<Reservation> reservationOptional = reservationRepository.findById(id);
         Optional<Landlord> landlordOptional = Optional.empty();
