@@ -1,7 +1,5 @@
-package klg.backend.lukasz.controller;
+package klg.backend.lukasz.tenant;
 
-import klg.backend.lukasz.model.Tenant;
-import klg.backend.lukasz.service.TenantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

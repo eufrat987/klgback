@@ -1,15 +1,16 @@
-package klg.backend.lukasz.model;
+package klg.backend.lukasz.reservation;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import klg.backend.lukasz.landlord.Landlord;
+import klg.backend.lukasz.tenant.Tenant;
+import klg.backend.lukasz.property.Property;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import java.time.Duration;
 import java.time.LocalDate;
-import java.util.Date;
 
 @NoArgsConstructor
 @RequiredArgsConstructor

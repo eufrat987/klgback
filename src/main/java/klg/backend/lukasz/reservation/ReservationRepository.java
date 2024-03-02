@@ -1,6 +1,6 @@
-package klg.backend.lukasz.repository;
+package klg.backend.lukasz.reservation;
 
-import klg.backend.lukasz.model.Reservation;
+import klg.backend.lukasz.reservation.Reservation;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 

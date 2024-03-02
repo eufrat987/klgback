@@ -1,12 +1,10 @@
 package klg.backend.lukasz.repository;
 
-import klg.backend.lukasz.model.Landlord;
-import klg.backend.lukasz.model.Reservation;
-import klg.backend.lukasz.model.Tenant;
+import klg.backend.lukasz.reservation.Reservation;
+import klg.backend.lukasz.reservation.ReservationRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;

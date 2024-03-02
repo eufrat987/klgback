@@ -1,8 +1,6 @@
-package klg.backend.lukasz.service;
+package klg.backend.lukasz.landlord;
 
-import klg.backend.lukasz.model.Landlord;
-import klg.backend.lukasz.model.Reservation;
-import klg.backend.lukasz.repository.LandlordRepository;
+import klg.backend.lukasz.reservation.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
