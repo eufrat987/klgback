@@ -25,11 +25,11 @@ public class Reservation {
     @Column(nullable = false)
     private Double cost;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "landlord_id", nullable = false)
     private Landlord landlord;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "tenant_id", nullable = false) //todo can be in tenant diff?
     private Tenant tenant;
 

@@ -2,10 +2,13 @@ package klg.backend.lukasz.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -22,9 +25,8 @@ public class Landlord { //todo join with tenant?
     @Column(nullable = false)
     private String name;
 
-
     @JsonIgnore
     @OneToMany(mappedBy = "landlord")
-    private Set<Reservation> reservations = new HashSet<>();
+    private List<Reservation> reservations = new ArrayList<>();
 
 }
