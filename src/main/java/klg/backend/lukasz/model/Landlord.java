@@ -15,10 +15,10 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "landlord")
-public class Landlord { //todo join with tenant?
+public class Landlord { //todo join with tenant? index?
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NonNull

@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.util.Date;
+
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Data
@@ -14,12 +18,18 @@ import lombok.RequiredArgsConstructor;
 public class Reservation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NonNull
-    @Column(nullable = false, name = "rental_period")
-    private Integer rentalPeriod; //todo change
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false, name = "rent_start")
+    private LocalDate rentStart;
+
+    @NonNull
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false, name = "rent_end")
+    private LocalDate rentEnd;
 
     @NonNull
     @Column(nullable = false)
@@ -37,11 +47,4 @@ public class Reservation {
     @JoinColumn(name = "tenant_id", nullable = false) //todo can be in tenant diff?
     private Tenant tenant;
 
-    /*
-
-    – With @OneToMany, we cannot limit the size of that collection, for example, in case of pagination.
-    – With @ManyToOne, you can modify the Repository:
-        to work with Pagination
-        or to sort/order by multiple fields
-     */
 }

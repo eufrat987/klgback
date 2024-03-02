@@ -18,7 +18,7 @@ import java.util.List;
 public class Property {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NonNull
@@ -31,11 +31,12 @@ public class Property {
 
     @NonNull
     @Column(nullable = false)
-    private Double surface;
+    private Integer surface;
 
     @NonNull
+    @Lob
     @Column(nullable = false)
-    private String description; //todo check
+    private String description;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "landlord_id", nullable = false)
