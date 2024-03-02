@@ -23,19 +23,18 @@ public class LandlordController {
         return new ResponseEntity<>(landlordRepository.findAll(), HttpStatus.OK);
     }
 
-    @PostMapping
-    ResponseEntity<Landlord> createLandlord(@RequestBody Landlord landlord) {
-        return new ResponseEntity<>(landlordRepository.save(landlord), HttpStatus.OK);
-    }
-
     @GetMapping("/{id}/reservations")
     ResponseEntity<List<Reservation>> getLandlordReservations(@PathVariable("id") long id) {
         Optional<Landlord> landlordOptional = landlordRepository.findById(id);
-        if (landlordOptional.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return landlordOptional
+                .map(landlord -> new ResponseEntity<>(landlord.getReservations(), HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
-        return new ResponseEntity<>(landlordOptional.get().getReservations(), HttpStatus.OK);
+    }
+
+    @PostMapping
+    ResponseEntity<Landlord> createLandlord(@RequestBody Landlord landlord) {
+        return new ResponseEntity<>(landlordRepository.save(landlord), HttpStatus.OK);
     }
 
 }
