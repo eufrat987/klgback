@@ -31,6 +31,7 @@ public class ReservationService {
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
     public Reservation createReservation(@RequestBody Reservation reservation) {
+        validate(reservation);
         setForeignKeys(reservation, reservation);
         return reservationRepository.save(reservation);
     }
@@ -52,6 +53,13 @@ public class ReservationService {
     private void validate(Reservation reservation) {
         if (!reservation.getRentStart().isBefore(reservation.getRentEnd())) {
             throw new ReservationRequestException("rentStart after rentEnd");
+        }
+
+        var dateIntersection = reservationRepository
+                .findDateIntersection(reservation.getRentStart(), reservation.getRentEnd());
+
+        if (dateIntersection.isPresent()) {
+            throw new ReservationRequestException("Property is rented already");
         }
     }
 
