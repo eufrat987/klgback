@@ -1,12 +1,14 @@
 package klg.backend.lukasz.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @NoArgsConstructor
 @RequiredArgsConstructor
+@Data
 @Entity
 @Table(name = "reservation")
 public class Reservation {
@@ -17,18 +19,16 @@ public class Reservation {
 
     @NonNull
     @Column(nullable = false)
-    private int rentalPeriod; //todo change
+    private Integer rentalPeriod; //todo change
 
     @NonNull
     @Column(nullable = false)
-    private double cost;
+    private Double cost;
 
-    @NonNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "landlord_id", nullable = false)
     private Landlord landlord;
 
-    @NonNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tenant_id", nullable = false)
     private Tenant tenant;

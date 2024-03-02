@@ -1,15 +1,14 @@
 package klg.backend.lukasz.model;
 
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @NoArgsConstructor
 @RequiredArgsConstructor
+@Data
 @Entity
 @Table(name = "landlord")
 public class Landlord { //todo join with tenant?

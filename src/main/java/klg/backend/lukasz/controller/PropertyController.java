@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/properties")
+@RequestMapping("api/v1/properties")
 public class PropertyController {
 
     @Autowired

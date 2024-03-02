@@ -22,7 +22,7 @@ public class ReservationRepositoryTest {
     @Test
     public void whenFindingCustomerById_thenCorrect() {
         reservationRepository.save(
-                new Reservation(6, 12, new Landlord("John"), new Tenant("Jim"))
+                new Reservation(6, 12)
         );
         assertThat(reservationRepository.findById(1L)).isInstanceOf(Optional.class);
     }
@@ -30,10 +30,10 @@ public class ReservationRepositoryTest {
     @Test
     public void whenFindingAllCustomers_thenCorrect() {
         reservationRepository.save(
-                new Reservation(6, 12, new Landlord("John"), new Tenant("Jim"))
+                new Reservation(6, 12)
         );
         reservationRepository.save(
-                new Reservation(6, 12, new Landlord("John2"), new Tenant("Jim2"))
+                new Reservation(6, 12)
         );
         assertThat(reservationRepository.findAll()).isInstanceOf(List.class);
     }
