@@ -14,7 +14,16 @@ public class LandlordService {
     LandlordRepository landlordRepository;
 
     public List<Landlord> getLandlords() {
-        return landlordRepository.findAll();
+        try {
+            Thread.sleep(10000);
+            System.out.println("1ldone");
+        } catch (Exception e) {}
+        List<Landlord> all = landlordRepository.findAll();
+        try {
+            Thread.sleep(10000);
+            System.out.println("ldone");
+        } catch (Exception e) {}
+        return all;
     }
 
     public List<Reservation> getLandlordReservations(long id) {

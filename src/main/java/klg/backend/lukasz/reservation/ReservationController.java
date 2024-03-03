@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-    @RequestMapping("api/v1/reservations")
+@RequestMapping("api/v1/reservations")
 public class ReservationController {
 
     @Autowired
@@ -24,7 +24,13 @@ public class ReservationController {
         return new ResponseEntity<>(reservationService.createReservation(reservation), HttpStatus.OK);
     }
 
-    @PutMapping("/{id}") //todo page?
+    @PostMapping("/l")
+    ResponseEntity<Reservation> createReservation2(@RequestBody Reservation reservation) {
+        return new ResponseEntity<>(reservationService.createReservation2(reservation), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+        //todo page?
     ResponseEntity<Reservation> updateReservation(@PathVariable("id") long id, @RequestBody Reservation reservation) {
         return new ResponseEntity<>(reservationService.updateReservation(id, reservation), HttpStatus.OK);
     }
