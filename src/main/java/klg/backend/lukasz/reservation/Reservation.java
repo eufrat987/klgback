@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 @Data
 @Entity
-@Table(name = "reservation", indexes = {@Index(columnList = "rentStart"), @Index(columnList = "rentEnd")})
+@Table(name = "reservation", indexes = {@Index(columnList = "rent_start"), @Index(columnList = "rent_end")})
 public class Reservation {
 
     @Id
