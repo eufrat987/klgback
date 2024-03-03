@@ -12,4 +12,9 @@ INSERT INTO property (landlord_id, name, unit_price, surface, description) VALUE
 
 INSERT INTO reservation (landlord_id, tenant_id, property_id, rent_start, rent_end, cost) VALUES
     (1, 1, 1, '2018-10-1', '2018-10-5', 40),
+    (1, 2, 1, '2018-10-1', '2018-10-5', 40),
+    (1, 2, 2, '2018-10-1', '2018-10-5', 40),
     (1, 1, 1, '2018-10-10', '2018-10-13', 40);
+
+
+
