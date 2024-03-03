@@ -1,4 +1,4 @@
-package klg.backend.lukasz;
+package klg.backend.lukasz.reservation;
 
 import klg.backend.lukasz.reservation.ReservationController;
 import org.junit.jupiter.api.Test;
