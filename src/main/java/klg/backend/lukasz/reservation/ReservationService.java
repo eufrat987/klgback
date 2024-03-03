@@ -77,7 +77,6 @@ public class ReservationService {
         var dateIntersection = reservationRepository
                 .findDateIntersection(reservation.getRentStart(), reservation.getRentEnd());
 
-        System.out.println("time: " + timeElapsed);
         if (dateIntersection.isPresent()) {
             throw new ReservationRequestException("Property is rented already");
         }
