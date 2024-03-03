@@ -25,13 +25,11 @@ public class Reservation {
 
     @NonNull
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd-MM-yyyy")
     @Column(nullable = false, name = "rent_start")
     private LocalDate rentStart;
 
     @NonNull
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd-MM-yyyy")
     @Column(nullable = false, name = "rent_end")
     private LocalDate rentEnd;
 

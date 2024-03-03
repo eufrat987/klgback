@@ -1,12 +1,13 @@
 package klg.backend.lukasz.reservation;
 
-import klg.backend.lukasz.reservation.report.ReportRequest;
 import klg.backend.lukasz.reservation.report.Report;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -21,10 +22,14 @@ public class ReservationController {
         return new ResponseEntity<>(reservationService.getReservations(), HttpStatus.OK);
     }
 
-    @GetMapping("/propertyReport")
-    ResponseEntity<Report> getPropertyReport(@RequestBody ReportRequest reportRequest) {
+    @GetMapping("/propertyReport/{id}")
+    ResponseEntity<Report> getPropertyReport(@PathVariable("id") long id,
+                                             @RequestParam("start")
+                                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                             @RequestParam("end")
+                                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return new ResponseEntity<>(
-                reservationService.getPropertyReport(reportRequest.getStart(), reportRequest.getEnd(), reportRequest.getId()),
+                reservationService.getPropertyReport(startDate, endDate, id),
                 HttpStatus.OK
         );
     }

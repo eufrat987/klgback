@@ -25,6 +25,8 @@ dependencies {
 //    testImplementation("org.junit.jupiter:junit-jupiter-api")
 //    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
+
 
     implementation("org.hsqldb:hsqldb:2.7.1")
     implementation("org.springframework.boot:spring-boot-starter-web:3.2.3")
