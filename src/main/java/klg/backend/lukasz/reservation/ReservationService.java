@@ -49,7 +49,7 @@ public class ReservationService {
         return null;
     }
 
-    @Transactional(isolation = Isolation.SERIALIZABLE)
+    @Transactional(isolation = Isolation.SERIALIZABLE) // test false ro for deadlock
     public Reservation createReservation(@RequestBody Reservation reservation) {
         validate(reservation);
 
