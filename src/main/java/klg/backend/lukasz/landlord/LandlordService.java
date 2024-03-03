@@ -17,8 +17,8 @@ public class LandlordService {
         return landlordRepository.findAll();
     }
 
-    public List<Reservation> getLandlordReservations(long id) {
-        return landlordRepository.findById(id)
+    public List<Reservation> getLandlordReservations(String name) {
+        return landlordRepository.findByName(name)
                 .map(Landlord::getReservations)
                 .orElseThrow(EntityNotFoundException::new);
     }

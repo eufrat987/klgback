@@ -19,7 +19,7 @@ public class LandlordServiceTest {
     @Test
     @Transactional
     public void whenFindingAllReservationByLandlord_thenCorrect() {
-        List<Reservation> reservations = landlordService.getLandlordReservations(1L);
+        List<Reservation> reservations = landlordService.getLandlordReservations("Bruce Wayne");
         assertThat(reservations.isEmpty()).isFalse();
     }
 

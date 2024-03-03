@@ -22,9 +22,9 @@ public class LandlordController {
         return new ResponseEntity<>(landlordService.getLandlords(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/reservations")
-    ResponseEntity<List<Reservation>> getLandlordReservations(@PathVariable("id") long id) {
-        return new ResponseEntity<>(landlordService.getLandlordReservations(id), HttpStatus.OK);
+    @GetMapping("/{name}/reservations")
+    ResponseEntity<List<Reservation>> getLandlordReservations(@PathVariable("name") String name) {
+        return new ResponseEntity<>(landlordService.getLandlordReservations(name), HttpStatus.OK);
     }
 
     @PostMapping

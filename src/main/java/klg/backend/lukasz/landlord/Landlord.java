@@ -16,8 +16,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Data
 @Entity
-@Table(name = "landlord")
-public class Landlord { //todo join with tenant? index?
+@Table(name = "landlord", indexes = @Index(columnList = "name", unique = true))
+public class Landlord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
