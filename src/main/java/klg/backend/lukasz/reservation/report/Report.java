@@ -1,4 +1,4 @@
-package klg.backend.lukasz.property.report;
+package klg.backend.lukasz.reservation.report;
 
 import lombok.AllArgsConstructor;
 

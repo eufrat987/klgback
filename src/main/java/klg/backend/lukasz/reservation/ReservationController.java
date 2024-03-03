@@ -1,5 +1,7 @@
 package klg.backend.lukasz.reservation;
 
+import klg.backend.lukasz.reservation.report.ReportRequest;
+import klg.backend.lukasz.reservation.report.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,14 @@ public class ReservationController {
     @GetMapping
     ResponseEntity<List<Reservation>> getReservations() {
         return new ResponseEntity<>(reservationService.getReservations(), HttpStatus.OK);
+    }
+
+    @GetMapping("/propertyReport")
+    ResponseEntity<Report> getPropertyReport(@RequestBody ReportRequest reportRequest) {
+        return new ResponseEntity<>(
+                reservationService.getPropertyReport(reportRequest.getStart(), reportRequest.getEnd(), reportRequest.getId()),
+                HttpStatus.OK
+        );
     }
 
     @PostMapping

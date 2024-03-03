@@ -1,12 +1,10 @@
 package klg.backend.lukasz.property;
 
 import jakarta.persistence.EntityNotFoundException;
-import klg.backend.lukasz.property.report.Report;
 import klg.backend.lukasz.reservation.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -27,10 +25,6 @@ public class PropertyService {
 
     public Property createProperty(Property property) {
         return propertyRepository.save(property);
-    }
-
-    public Report getReport(LocalDate start, LocalDate end) {
-        return propertyRepository.getReport(start, end).orElseThrow(RuntimeException::new);
     }
 
 }

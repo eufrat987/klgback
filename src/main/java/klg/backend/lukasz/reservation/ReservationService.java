@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import klg.backend.lukasz.exception.ReservationRequestException;
 import klg.backend.lukasz.landlord.LandlordRepository;
 import klg.backend.lukasz.property.PropertyRepository;
+import klg.backend.lukasz.reservation.report.Report;
 import klg.backend.lukasz.tenant.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,6 +68,10 @@ public class ReservationService {
         reservationInDB.setRentEnd(reservation.getRentEnd());
 
         return reservationRepository.save(reservationInDB);
+    }
+
+    public Report getPropertyReport(LocalDate start, LocalDate end, long id) {
+        return reservationRepository.getPropertyReport(start, end, id).orElseThrow(RuntimeException::new);
     }
 
     private void validate(Reservation reservation) {

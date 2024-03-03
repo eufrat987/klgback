@@ -1,4 +1,4 @@
-package klg.backend.lukasz.property.report;
+package klg.backend.lukasz.reservation.report;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -11,6 +11,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReportRequest {
+
+    private long id;
 
     @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate start;
