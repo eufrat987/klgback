@@ -54,7 +54,7 @@ public class ReservationServiceTest {
     }
 
     @Test
-    public void whenCreatingReservationNoConflict2_thenCorrect() {
+    public void whenCreatingReservationConflict5_thenFailure() {
         var reservation = new Reservation(
                 LocalDate.of(2000, 1, 3),
                 LocalDate.of(2000, 1, 6),
@@ -67,9 +67,9 @@ public class ReservationServiceTest {
         );
 
         given(reservationRepository.findDateIntersection(any(), any())).willReturn(Optional.of(reservation2));
-        given(reservationRepository.save(any())).willReturn(reservation);
 
-        assertThat(reservationService.createReservation(reservation)).isNotNull();
+        assertThatThrownBy(() -> reservationService.createReservation(reservation))
+                .isInstanceOf(ReservationRequestException.class);
     }
 
     @Test()

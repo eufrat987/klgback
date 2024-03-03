@@ -1,5 +1,7 @@
 package klg.backend.lukasz.property;
 
+import klg.backend.lukasz.property.report.Report;
+import klg.backend.lukasz.property.report.ReportRequest;
 import klg.backend.lukasz.reservation.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,9 +23,17 @@ public class PropertyController {
     }
 
     @GetMapping("/{id}/reservations")
-    ResponseEntity<List<Reservation>> getLandlordReservations(@PathVariable("id") long id) {
+    ResponseEntity<List<Reservation>> getPropertyReservations(@PathVariable("id") long id) {
         return new ResponseEntity<>(propertyService.getPropertyReservations(id), HttpStatus.OK);
 
+    }
+
+    @GetMapping("/{id}/report")
+    ResponseEntity<Report> getPropertyReport(@PathVariable("id") long id, @RequestBody ReportRequest reportRequest) {
+        return new ResponseEntity<>(
+                propertyService.getReport(reportRequest.getStart(), reportRequest.getEnd()),
+                HttpStatus.OK
+        );
     }
 
     @PostMapping
