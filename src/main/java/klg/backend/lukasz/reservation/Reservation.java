@@ -37,6 +37,10 @@ public class Reservation {
     @Column(nullable = false)
     private Double cost;
 
+    @NonNull
+    @Column(nullable = false)
+    private Integer guests;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "landlord_id", nullable = false)
     private Landlord landlord;

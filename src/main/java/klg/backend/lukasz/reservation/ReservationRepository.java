@@ -32,14 +32,11 @@ public interface ReservationRepository extends ListCrudRepository<Reservation, L
     Optional<Report> getPropertyReport(@Param("start") LocalDate start, @Param("end") LocalDate end, @Param("id") long id);
 
     @Query(value = """
-            SELECT p.name as name, t.name as tenant, count(*) as count, sum(r.cost) as cost 
-            FROM reservation r
+            SELECT t.name as TENANT, count(distinct r.PROPERTY_ID) AS PROPERTIES, sum(r.cost) AS PROFIT, sum(guests) as GUESTS from reservation r
             LEFT JOIN TENANT t on t.id = r.tenant_id
-            LEFT JOIN property p on p.id = r.property_id
-            WHERE rent_start >= :start 
-            AND rent_end <= :end
-            GROUP BY t.name, p.name
+            WHERE rent_start >= :start and rent_end <= :end
+            GROUP BY t.name
             """, nativeQuery = true)
-    List<ReportTenant> getTenentReport(@Param("start") LocalDate start, @Param("end") LocalDate end);
+    List<ReportTenant> getTenantReport(@Param("start") LocalDate start, @Param("end") LocalDate end);
 
 }

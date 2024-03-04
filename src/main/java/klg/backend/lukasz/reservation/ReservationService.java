@@ -5,6 +5,7 @@ import klg.backend.lukasz.exception.ReservationRequestException;
 import klg.backend.lukasz.landlord.LandlordRepository;
 import klg.backend.lukasz.property.PropertyRepository;
 import klg.backend.lukasz.reservation.report.Report;
+import klg.backend.lukasz.reservation.report.ReportTenant;
 import klg.backend.lukasz.tenant.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,24 +32,6 @@ public class ReservationService {
         return reservationRepository.findAll();
     }
 
-    @Transactional(isolation = Isolation.SERIALIZABLE)
-    public Reservation createReservation2(@RequestBody Reservation reservation) {
-        var x = LocalDate.now();
-        for (var i = 0; i < 500_000; i++) {
-            System.out.println(i);
-            var res = new Reservation();
-            res.setRentStart(x);
-            res.setRentEnd(x.plusDays(3));
-            res.setCost(reservation.getCost());
-            setForeignKeys(reservation, res);
-
-            reservationRepository.save(res);
-            x = x.plusDays(5);
-        }
-
-        return null;
-    }
-
     @Transactional(isolation = Isolation.SERIALIZABLE) // test false ro for deadlock
     public Reservation createReservation(@RequestBody Reservation reservation) {
         validate(reservation);
@@ -72,6 +55,10 @@ public class ReservationService {
 
     public Report getPropertyReport(LocalDate start, LocalDate end, long id) {
         return reservationRepository.getPropertyReport(start, end, id).orElseThrow(RuntimeException::new);
+    }
+
+    public List<ReportTenant> getTenantsReport(LocalDate start, LocalDate end) {
+        return reservationRepository.getTenantReport(start, end);
     }
 
     private void validate(Reservation reservation) {

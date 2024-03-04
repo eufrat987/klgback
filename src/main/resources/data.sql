@@ -10,11 +10,11 @@ INSERT INTO property (landlord_id, name, unit_price, surface, description) VALUE
     (1, 'Bydgoszcz ul. Rataja 8', 40.0, 42, 'Oferuje na wynajem mieszkanie 2-pokojowe o powierzchni uzytkowej 48m kw., w Bydgoszczy przy ul. Rataja 8 (Fordon, os. Szybownikow). Mieszkanie na 3 pietrze w 4 pietrowym budynku, blok ocieplony z zewnatrz, wyremontowana klatka schodowa. Lokalizacja spokojna na uboczu osiedla. Duza ilosc miejsc parkingowych wokol bloku.'),
     (2, 'Bialystok ul. Depowej 9G', 20, 25, 'Wynajme 2 - pokojowe mieszkanie o pow. 35 m2 przy ul. Depowej 9G w Bialymstoku. Mieszkanie sklada sie z salonu z aneksem kuchennym i wyjsciem na obszerny balkon, oddzielnej lazienki oraz sypialni. Mieszkanie jest umeblowane i wyposazone w sprzet AGD - pralka, lodowka, piekarnik z mikrofala, plyta indukcyjna, zmywarka. Mieszkanie jest wyposazone takze w klimatyzacje oraz TV (50 cali) . Mieszkanie dla osob niepalacych, bez zwierzat. Mieszkanie znajduje sie na 3. pietrze (jest winda). Czynsz wynosi 1800 zl plus ok 500 zl oplat (czynsz na rzecz wspolnoty, prad oraz internet). Lokal dostepny od reki Kaucja zwrotna 3000zl.');
 
-INSERT INTO reservation (landlord_id, tenant_id, property_id, rent_start, rent_end, cost) VALUES
-    (1, 1, 1, '2018-10-1', '2018-10-5', 40),
-    (1, 2, 1, '2018-10-1', '2018-10-5', 40),
-    (1, 2, 2, '2018-10-1', '2018-10-5', 40),
-    (1, 1, 1, '2018-10-10', '2018-10-13', 40);
+INSERT INTO reservation (landlord_id, tenant_id, property_id, rent_start, rent_end, cost, guests) VALUES
+    (1, 1, 1, '2018-10-1', '2018-10-5', 40, 6),
+    (1, 2, 1, '2018-10-7', '2018-10-12', 40, 8),
+    (1, 2, 2, '2018-10-17', '2018-10-18', 40, 4),
+    (1, 1, 1, '2018-10-22', '2018-10-29', 40, 12);
 
 
 
