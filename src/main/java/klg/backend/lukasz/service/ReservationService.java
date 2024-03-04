@@ -46,7 +46,7 @@ public class ReservationService {
         Reservation reservationInDB = reservationRepository.findById(id)
                 .orElseThrow(EntityNotFoundException::new);
 
-        setForeignKeys(reservation, reservationInDB);
+        setForeignKeys(reservation, reservationInDB); // todo ?
         reservationInDB.setCost(reservation.getCost());
         reservationInDB.setRentStart(reservation.getRentStart());
         reservationInDB.setRentEnd(reservation.getRentEnd());

@@ -27,11 +27,11 @@ public class Property {
 
     @NonNull
     @Column(nullable = false, name = "unit_price")
-    private Double unitPrice;
+    private Double unitPrice; // todo ??
 
     @NonNull
     @Column(nullable = false)
-    private Integer surface;
+    private Integer surface; // todo ??
 
     @NonNull
     @Lob
