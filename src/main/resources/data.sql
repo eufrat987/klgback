@@ -6,9 +6,9 @@ INSERT INTO tenant (name) VALUES
     ('Jack Bauer'),
     ('John Wick');
 
-INSERT INTO property (landlord_id, name, unit_price, surface, description) VALUES
-    (1, 'Dom nad jeziorem', 150.0, 150, 'Przestronny dom z widokiem na jezioro.'),
-    (2, 'Apartament w centrum', 200, 100, 'Nowoczesny apartament w sercu miasta.');
+INSERT INTO property (name, unit_price, surface, description) VALUES
+    ('Dom nad jeziorem', 150.0, 150, 'Przestronny dom z widokiem na jezioro.'),
+    ('Apartament w centrum', 200, 100, 'Nowoczesny apartament w sercu miasta.');
 
 INSERT INTO reservation (landlord_id, tenant_id, property_id, rent_start, rent_end, cost, guests) VALUES
     (1, 1, 1, '2018-10-1', '2018-10-5', 40, 6),

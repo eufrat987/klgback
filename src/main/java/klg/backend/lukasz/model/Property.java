@@ -38,13 +38,8 @@ public class Property {
     @Column(nullable = false)
     private String description;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "landlord_id", nullable = false)
-    private Landlord landlord;
-
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "property")
     private List<Reservation> reservations = new ArrayList<>();
-
 
 }
