@@ -1,7 +1,9 @@
-package klg.backend.lukasz.reservation;
+package klg.backend.lukasz.controller;
 
-import klg.backend.lukasz.reservation.report.Report;
-import klg.backend.lukasz.reservation.report.ReportTenant;
+import klg.backend.lukasz.model.Reservation;
+import klg.backend.lukasz.service.ReservationService;
+import klg.backend.lukasz.repository.report.Report;
+import klg.backend.lukasz.repository.report.ReportTenant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -52,7 +54,6 @@ public class ReservationController {
     }
 
     @PutMapping("/{id}")
-        //todo page?
     ResponseEntity<Reservation> updateReservation(@PathVariable("id") long id, @RequestBody Reservation reservation) {
         return new ResponseEntity<>(reservationService.updateReservation(id, reservation), HttpStatus.OK);
     }

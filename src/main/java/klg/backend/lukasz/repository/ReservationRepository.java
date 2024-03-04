@@ -1,7 +1,8 @@
-package klg.backend.lukasz.reservation;
+package klg.backend.lukasz.repository;
 
-import klg.backend.lukasz.reservation.report.Report;
-import klg.backend.lukasz.reservation.report.ReportTenant;
+import klg.backend.lukasz.model.Reservation;
+import klg.backend.lukasz.repository.report.Report;
+import klg.backend.lukasz.repository.report.ReportTenant;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Repository

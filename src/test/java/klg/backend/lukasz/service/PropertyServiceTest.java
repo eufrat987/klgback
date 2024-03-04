@@ -1,7 +1,8 @@
-package klg.backend.lukasz.property;
+package klg.backend.lukasz.service;
 
 import jakarta.transaction.Transactional;
-import klg.backend.lukasz.reservation.Reservation;
+import klg.backend.lukasz.model.Reservation;
+import klg.backend.lukasz.service.PropertyService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

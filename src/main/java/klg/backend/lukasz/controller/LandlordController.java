@@ -1,6 +1,8 @@
-package klg.backend.lukasz.landlord;
+package klg.backend.lukasz.controller;
 
-import klg.backend.lukasz.reservation.Reservation;
+import klg.backend.lukasz.service.LandlordService;
+import klg.backend.lukasz.model.Landlord;
+import klg.backend.lukasz.model.Reservation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

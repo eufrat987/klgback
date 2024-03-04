@@ -1,7 +1,9 @@
-package klg.backend.lukasz.property;
+package klg.backend.lukasz.service;
 
 import jakarta.persistence.EntityNotFoundException;
-import klg.backend.lukasz.reservation.Reservation;
+import klg.backend.lukasz.model.Property;
+import klg.backend.lukasz.repository.PropertyRepository;
+import klg.backend.lukasz.model.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

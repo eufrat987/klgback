@@ -1,9 +1,7 @@
-package klg.backend.lukasz.landlord;
+package klg.backend.lukasz.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import klg.backend.lukasz.property.Property;
-import klg.backend.lukasz.reservation.Reservation;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;

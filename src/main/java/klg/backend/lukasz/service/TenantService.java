@@ -1,5 +1,7 @@
-package klg.backend.lukasz.tenant;
+package klg.backend.lukasz.service;
 
+import klg.backend.lukasz.model.Tenant;
+import klg.backend.lukasz.repository.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;

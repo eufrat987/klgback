@@ -1,6 +1,6 @@
-package klg.backend.lukasz.tenant;
+package klg.backend.lukasz.repository;
 
-import klg.backend.lukasz.tenant.Tenant;
+import klg.backend.lukasz.model.Tenant;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 

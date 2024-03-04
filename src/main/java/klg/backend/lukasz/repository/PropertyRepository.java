@@ -1,5 +1,6 @@
-package klg.backend.lukasz.property;
+package klg.backend.lukasz.repository;
 
+import klg.backend.lukasz.model.Property;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 

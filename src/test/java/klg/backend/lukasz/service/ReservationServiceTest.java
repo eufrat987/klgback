@@ -1,9 +1,9 @@
-package klg.backend.lukasz.reservation;
+package klg.backend.lukasz.service;
 
 import klg.backend.lukasz.exception.ReservationRequestException;
-import klg.backend.lukasz.reservation.Reservation;
-import klg.backend.lukasz.reservation.ReservationRepository;
-import klg.backend.lukasz.reservation.ReservationService;
+import klg.backend.lukasz.model.Reservation;
+import klg.backend.lukasz.repository.ReservationRepository;
+import klg.backend.lukasz.service.ReservationService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -32,7 +32,7 @@ public class ReservationServiceTest {
         var reservation = new Reservation(
                 LocalDate.of(2000, 1, 4),
                 LocalDate.of(2000, 1, 2),
-                20.0
+                20.0, 6
         );
 
         assertThatThrownBy(() -> reservationService.createReservation(reservation))
@@ -45,7 +45,7 @@ public class ReservationServiceTest {
         var reservation = new Reservation(
                 LocalDate.of(2000, 1, 3),
                 LocalDate.of(2000, 1, 6),
-                20.0
+                20.0, 6
         );
         given(reservationRepository.findDateIntersection(any(), any())).willReturn(Optional.empty());
         given(reservationRepository.save(any())).willReturn(reservation);
@@ -58,12 +58,12 @@ public class ReservationServiceTest {
         var reservation = new Reservation(
                 LocalDate.of(2000, 1, 3),
                 LocalDate.of(2000, 1, 6),
-                20.0
+                20.0, 6
         );
         var reservation2 = new Reservation(
                 LocalDate.of(2000, 1, 2),
                 LocalDate.of(2000, 1, 3),
-                20.0
+                20.0, 6
         );
 
         given(reservationRepository.findDateIntersection(any(), any())).willReturn(Optional.of(reservation2));
@@ -77,12 +77,12 @@ public class ReservationServiceTest {
         var reservation = new Reservation(
                 LocalDate.of(2000, 1, 3),
                 LocalDate.of(2000, 1, 6),
-                20.0
+                20.0, 6
         );
         var reservation2 = new Reservation(
                 LocalDate.of(2000, 1, 2),
                 LocalDate.of(2000, 1, 4),
-                20.0
+                20.0, 6
         );
 
         given(reservationRepository.findDateIntersection(any(), any())).willReturn(Optional.of(reservation2));
@@ -96,12 +96,12 @@ public class ReservationServiceTest {
         var reservation = new Reservation(
                 LocalDate.of(2000, 1, 3),
                 LocalDate.of(2000, 1, 6),
-                20.0
+                20.0, 6
         );
         var reservation2 = new Reservation(
                 LocalDate.of(2000, 1, 2),
                 LocalDate.of(2000, 1, 7),
-                20.0
+                20.0, 6
         );
 
         given(reservationRepository.findDateIntersection(any(), any())).willReturn(Optional.of(reservation2));
@@ -115,12 +115,12 @@ public class ReservationServiceTest {
         var reservation = new Reservation(
                 LocalDate.of(2000, 1, 3),
                 LocalDate.of(2000, 1, 6),
-                20.0
+                20.0, 6
         );
         var reservation2 = new Reservation(
                 LocalDate.of(2000, 1, 2),
                 LocalDate.of(2000, 1, 4),
-                20.0
+                20.0, 6
         );
 
         given(reservationRepository.findDateIntersection(any(), any())).willReturn(Optional.of(reservation2));
@@ -134,12 +134,12 @@ public class ReservationServiceTest {
         var reservation = new Reservation(
                 LocalDate.of(2000, 1, 3),
                 LocalDate.of(2000, 1, 6),
-                20.0
+                20.0, 6
         );
         var reservation2 = new Reservation(
                 LocalDate.of(2000, 1, 4),
                 LocalDate.of(2000, 1, 7),
-                20.0
+                20.0, 6
         );
 
         given(reservationRepository.findDateIntersection(any(), any())).willReturn(Optional.of(reservation2));

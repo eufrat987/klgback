@@ -1,17 +1,18 @@
-package klg.backend.lukasz.reservation;
+package klg.backend.lukasz.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import klg.backend.lukasz.exception.ReservationRequestException;
-import klg.backend.lukasz.landlord.LandlordRepository;
-import klg.backend.lukasz.property.PropertyRepository;
-import klg.backend.lukasz.reservation.report.Report;
-import klg.backend.lukasz.reservation.report.ReportTenant;
-import klg.backend.lukasz.tenant.TenantRepository;
+import klg.backend.lukasz.model.Reservation;
+import klg.backend.lukasz.repository.LandlordRepository;
+import klg.backend.lukasz.repository.PropertyRepository;
+import klg.backend.lukasz.repository.ReservationRepository;
+import klg.backend.lukasz.repository.report.Report;
+import klg.backend.lukasz.repository.report.ReportTenant;
+import klg.backend.lukasz.repository.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -33,7 +34,7 @@ public class ReservationService {
     }
 
     @Transactional(isolation = Isolation.SERIALIZABLE) // test false ro for deadlock
-    public Reservation createReservation(@RequestBody Reservation reservation) {
+    public Reservation createReservation(Reservation reservation) {
         validate(reservation);
         setForeignKeys(reservation, reservation);
         return reservationRepository.save(reservation);
