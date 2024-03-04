@@ -3,7 +3,7 @@ package klg.backend.lukasz.service;
 import klg.backend.lukasz.exception.ReservationRequestException;
 import klg.backend.lukasz.model.Reservation;
 import klg.backend.lukasz.repository.ReservationRepository;
-import klg.backend.lukasz.service.ReservationService;
+import klg.backend.lukasz.service.impl.ReservationServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,7 +22,7 @@ import static org.mockito.BDDMockito.given;
 public class ReservationServiceTest {
 
     @InjectMocks
-    ReservationService reservationService;
+    ReservationServiceImpl reservationService;
 
     @Mock
     private ReservationRepository reservationRepository;

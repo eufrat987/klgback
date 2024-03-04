@@ -1,9 +1,9 @@
 package klg.backend.lukasz.controller;
 
 import klg.backend.lukasz.model.Reservation;
+import klg.backend.lukasz.repository.queryresult.Report;
+import klg.backend.lukasz.repository.queryresult.ReportTenant;
 import klg.backend.lukasz.service.ReservationService;
-import klg.backend.lukasz.repository.report.Report;
-import klg.backend.lukasz.repository.report.ReportTenant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -39,9 +39,9 @@ public class ReservationController {
 
     @GetMapping("/tenantsReport")
     ResponseEntity<List<ReportTenant>> getTenantsReport(@RequestParam("start")
-                                            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-                                                  @RequestParam("end")
-                                            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+                                                        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                                        @RequestParam("end")
+                                                        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return new ResponseEntity<>(
                 reservationService.getTenantsReport(startDate, endDate),
                 HttpStatus.OK

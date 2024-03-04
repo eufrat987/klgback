@@ -1,4 +1,4 @@
-package klg.backend.lukasz.repository.report;
+package klg.backend.lukasz.repository.queryresult;
 
 public interface ReportTenant {
 

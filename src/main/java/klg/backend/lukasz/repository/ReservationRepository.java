@@ -1,8 +1,8 @@
 package klg.backend.lukasz.repository;
 
 import klg.backend.lukasz.model.Reservation;
-import klg.backend.lukasz.repository.report.Report;
-import klg.backend.lukasz.repository.report.ReportTenant;
+import klg.backend.lukasz.repository.queryresult.Report;
+import klg.backend.lukasz.repository.queryresult.ReportTenant;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
