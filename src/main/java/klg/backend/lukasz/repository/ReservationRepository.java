@@ -3,6 +3,7 @@ package klg.backend.lukasz.repository;
 import klg.backend.lukasz.model.Reservation;
 import klg.backend.lukasz.repository.queryresult.Report;
 import klg.backend.lukasz.repository.queryresult.ReportTenant;
+import klg.backend.lukasz.repository.queryresult.ReportTenant2;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Repository
 public interface ReservationRepository extends ListCrudRepository<Reservation, Long> {
@@ -32,11 +34,22 @@ public interface ReservationRepository extends ListCrudRepository<Reservation, L
     Optional<Report> getPropertyReport(@Param("start") LocalDate start, @Param("end") LocalDate end, @Param("id") long id);
 
     @Query(value = """
-            SELECT t.name as TENANT, count(distinct r.PROPERTY_ID) AS PROPERTIES, sum(r.cost) AS PROFIT, sum(guests) as GUESTS from reservation r
+            SELECT t.name as TENANT, count(distinct r.PROPERTY_ID) AS PROPERTIES, sum(r.cost) AS PROFIT, sum(guests) as GUESTS
+            FROM reservation r
             LEFT JOIN TENANT t on t.id = r.tenant_id
             WHERE rent_start >= :start and rent_end <= :end
             GROUP BY t.name
             """, nativeQuery = true)
     List<ReportTenant> getTenantReport(@Param("start") LocalDate start, @Param("end") LocalDate end);
+
+    @Query(value = """
+            SELECT t.name  as TENANT, p.name as Property, sum(r.cost) AS PROFIT, sum(guests) as GUESTS
+            FROM reservation r
+            LEFT JOIN TENANT t on t.id = r.tenant_id
+            LEFT join PROPERTY p on p.id = r.property_id
+            WHERE rent_start >= :start and rent_end <= :end
+            GROUP BY t.name, p.name	ORDER BY p.name
+            """, nativeQuery = true)
+    List<ReportTenant2> getTenantReport2(@Param("start") LocalDate start, @Param("end") LocalDate end);
 
 }
