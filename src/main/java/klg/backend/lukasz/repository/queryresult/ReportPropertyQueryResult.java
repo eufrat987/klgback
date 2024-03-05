@@ -1,6 +1,6 @@
 package klg.backend.lukasz.repository.queryresult;
 
-public interface Report {
+public interface ReportPropertyQueryResult {
 
     Integer getCount();
     Integer getDays();

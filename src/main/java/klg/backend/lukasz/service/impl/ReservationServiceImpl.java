@@ -8,12 +8,10 @@ import klg.backend.lukasz.repository.LandlordRepository;
 import klg.backend.lukasz.repository.PropertyRepository;
 import klg.backend.lukasz.repository.ReservationRepository;
 import klg.backend.lukasz.repository.TenantRepository;
-import klg.backend.lukasz.repository.queryresult.Report;
-import klg.backend.lukasz.repository.queryresult.ReportTenant;
+import klg.backend.lukasz.repository.queryresult.ReportPropertyQueryResult;
 import klg.backend.lukasz.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,15 +56,11 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.save(reservationInDB);
     }
 
-    public Report getPropertyReport(LocalDate start, LocalDate end, long id) {
+    public ReportPropertyQueryResult getPropertyReport(LocalDate start, LocalDate end, long id) {
         return reservationRepository.getPropertyReport(start, end, id).orElseThrow(RuntimeException::new);
     }
 
-    public List<ReportTenant> getTenantsReport(LocalDate start, LocalDate end) {
-        return reservationRepository.getTenantReport(start, end);
-    }
-
-    public ReportResponse getTenantsReport2(LocalDate start, LocalDate end) {
+    public ReportResponse getTenantsReport(LocalDate start, LocalDate end) {
         var response = new ReportResponse();
         var slice = reservationRepository.getTenantReport2(start, end, PageRequest.of(0, 20));
 
@@ -101,17 +95,21 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     private void setForeignKeys(Reservation newReservation, Reservation reservationInDB) {
-        var landlord = landlordRepository.findById(newReservation.getLandlord().getId())
-                .orElseThrow(EntityNotFoundException::new);
-        reservationInDB.setLandlord(landlord);
-
-        var tenant = tenantRepository.findById(newReservation.getTenant().getId())
-                .orElseThrow(EntityNotFoundException::new);
-        reservationInDB.setTenant(tenant);
-
-        var property = propertyRepository.findById(newReservation.getProperty().getId())
-                .orElseThrow(EntityNotFoundException::new);
-        reservationInDB.setProperty(property);
+        if (newReservation.getLandlord() != null) {
+            var landlord = landlordRepository.findById(newReservation.getLandlord().getId())
+                    .orElseThrow(EntityNotFoundException::new);
+            reservationInDB.setLandlord(landlord);
+        }
+        if (newReservation.getTenant() != null) {
+            var tenant = tenantRepository.findById(newReservation.getTenant().getId())
+                    .orElseThrow(EntityNotFoundException::new);
+            reservationInDB.setTenant(tenant);
+        }
+        if (newReservation.getProperty() != null) {
+            var property = propertyRepository.findById(newReservation.getProperty().getId())
+                    .orElseThrow(EntityNotFoundException::new);
+            reservationInDB.setProperty(property);
+        }
     }
 
 }

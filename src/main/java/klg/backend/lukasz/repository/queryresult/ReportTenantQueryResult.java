@@ -1,9 +1,9 @@
 package klg.backend.lukasz.repository.queryresult;
 
-public interface ReportTenant {
+public interface ReportTenantQueryResult {
 
     String getTenant();
-    Integer getProperties();
+    String getProperty();
     Double getProfit();
     Integer getGuests();
 
