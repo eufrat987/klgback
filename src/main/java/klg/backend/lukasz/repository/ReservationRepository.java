@@ -4,6 +4,8 @@ import klg.backend.lukasz.model.Reservation;
 import klg.backend.lukasz.repository.queryresult.Report;
 import klg.backend.lukasz.repository.queryresult.ReportTenant;
 import klg.backend.lukasz.repository.queryresult.ReportTenant2;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -12,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 @Repository
 public interface ReservationRepository extends ListCrudRepository<Reservation, Long> {
@@ -50,6 +51,6 @@ public interface ReservationRepository extends ListCrudRepository<Reservation, L
             WHERE rent_start >= :start and rent_end <= :end
             GROUP BY t.name, p.name	ORDER BY p.name
             """, nativeQuery = true)
-    List<ReportTenant2> getTenantReport2(@Param("start") LocalDate start, @Param("end") LocalDate end);
+    Slice<ReportTenant2> getTenantReport2(@Param("start") LocalDate start, @Param("end") LocalDate end, Pageable pageable);
 
 }

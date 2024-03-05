@@ -12,6 +12,8 @@ import klg.backend.lukasz.repository.queryresult.Report;
 import klg.backend.lukasz.repository.queryresult.ReportTenant;
 import klg.backend.lukasz.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,14 +68,20 @@ public class ReservationServiceImpl implements ReservationService {
 
     public ReportResponse getTenantsReport2(LocalDate start, LocalDate end) {
         var response = new ReportResponse();
-        var query = reservationRepository.getTenantReport2(start, end);
-        query.forEach(row -> {
-            response.addToTenants(row.getTenant());
-            var entry = response.getEntry(row.getProperty());
-            entry.addToGuests(row.getGuests());
-            entry.addToProfit(row.getProfit());
-            response.addToProfit(row.getProfit());
-        });
+        var slice = reservationRepository.getTenantReport2(start, end, PageRequest.of(0, 20));
+
+        while (true) {
+            slice.get().forEach(row -> {
+                response.addToTenants(row.getTenant());
+                var entry = response.getEntry(row.getProperty());
+                entry.addToGuests(row.getGuests());
+                entry.addToProfit(row.getProfit());
+                response.addToProfit(row.getProfit());
+            });
+            if (!slice.hasNext())
+                break;
+            slice = reservationRepository.getTenantReport2(start, end, slice.nextPageable());
+        }
 
         response.setNumOfProperties(response.getPropertyReport().size());
         return response;
