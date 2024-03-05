@@ -1,5 +1,6 @@
 package klg.backend.lukasz.controller;
 
+import klg.backend.lukasz.controller.response.ReportResponse;
 import klg.backend.lukasz.model.Reservation;
 import klg.backend.lukasz.repository.queryresult.Report;
 import klg.backend.lukasz.repository.queryresult.ReportTenant;
@@ -44,6 +45,17 @@ public class ReservationController {
                                                         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return new ResponseEntity<>(
                 reservationService.getTenantsReport(startDate, endDate),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/tenantsReport2")
+    ResponseEntity<ReportResponse> getTenantsReport2(@RequestParam("start")
+                                                          @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                                          @RequestParam("end")
+                                                          @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+        return new ResponseEntity<>(
+                reservationService.getTenantsReport2(startDate, endDate),
                 HttpStatus.OK
         );
     }

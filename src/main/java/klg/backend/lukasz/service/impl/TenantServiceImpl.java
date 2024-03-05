@@ -17,7 +17,7 @@ public class TenantServiceImpl implements TenantService {
         return tenantRepository.findAll();
     }
 
-    public Tenant createProperty(Tenant tenant) {
+    public Tenant createTenant(Tenant tenant) {
         return tenantRepository.save(tenant);
     }
 
