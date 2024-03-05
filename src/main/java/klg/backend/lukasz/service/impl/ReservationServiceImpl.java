@@ -93,7 +93,7 @@ public class ReservationServiceImpl implements ReservationService {
         }
 
         var dateIntersection = reservationRepository
-                .findDateIntersection(reservation.getRentStart(), reservation.getRentEnd());
+                .findDateIntersection(reservation.getRentStart(), reservation.getRentEnd(), reservation.getId());
 
         if (dateIntersection.isPresent()) {
             throw new ReservationRequestException("Property is rented already");
@@ -101,21 +101,17 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     private void setForeignKeys(Reservation newReservation, Reservation reservationInDB) {
-        if (newReservation.getLandlord() != null) {
-            var landlord = landlordRepository.findById(newReservation.getLandlord().getId())
-                    .orElseThrow(EntityNotFoundException::new);
-            reservationInDB.setLandlord(landlord);
-        }
-        if (newReservation.getTenant() != null) {
-            var tenant = tenantRepository.findById(newReservation.getTenant().getId())
-                    .orElseThrow(EntityNotFoundException::new);
-            reservationInDB.setTenant(tenant);
-        }
-        if (newReservation.getProperty() != null) {
-            var property = propertyRepository.findById(newReservation.getProperty().getId())
-                    .orElseThrow(EntityNotFoundException::new);
-            reservationInDB.setProperty(property);
-        }
+        var landlord = landlordRepository.findById(newReservation.getLandlord().getId())
+                .orElseThrow(EntityNotFoundException::new);
+        reservationInDB.setLandlord(landlord);
+
+        var tenant = tenantRepository.findById(newReservation.getTenant().getId())
+                .orElseThrow(EntityNotFoundException::new);
+        reservationInDB.setTenant(tenant);
+
+        var property = propertyRepository.findById(newReservation.getProperty().getId())
+                .orElseThrow(EntityNotFoundException::new);
+        reservationInDB.setProperty(property);
     }
 
 }

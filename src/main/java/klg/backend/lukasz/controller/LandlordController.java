@@ -1,5 +1,6 @@
 package klg.backend.lukasz.controller;
 
+import klg.backend.lukasz.controller.request.LandlordRequest;
 import klg.backend.lukasz.model.Landlord;
 import klg.backend.lukasz.model.Reservation;
 import klg.backend.lukasz.service.LandlordService;
@@ -30,8 +31,8 @@ public class LandlordController {
     }
 
     @PostMapping
-    ResponseEntity<Landlord> createLandlord(@RequestBody Landlord landlord) {
-        return new ResponseEntity<>(landlordService.createLandlord(landlord), HttpStatus.OK);
+    ResponseEntity<Landlord> createLandlord(@RequestBody LandlordRequest landlord) {
+        return new ResponseEntity<>(landlordService.createLandlord(landlord.map()), HttpStatus.OK);
     }
 
 }

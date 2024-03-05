@@ -16,6 +16,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
@@ -47,7 +48,7 @@ public class ReservationServiceTest {
                 LocalDate.of(2000, 1, 6),
                 20.0, 6
         );
-        given(reservationRepository.findDateIntersection(any(), any())).willReturn(Optional.empty());
+        given(reservationRepository.findDateIntersection(any(), any(), anyLong())).willReturn(Optional.empty());
         given(reservationRepository.save(any())).willReturn(reservation);
 
         assertThat(reservationService.createReservation(reservation)).isNotNull();
@@ -66,7 +67,7 @@ public class ReservationServiceTest {
                 20.0, 6
         );
 
-        given(reservationRepository.findDateIntersection(any(), any())).willReturn(Optional.of(reservation2));
+        given(reservationRepository.findDateIntersection(any(), any(), anyLong())).willReturn(Optional.of(reservation2));
 
         assertThatThrownBy(() -> reservationService.createReservation(reservation))
                 .isInstanceOf(ReservationRequestException.class);
@@ -85,7 +86,7 @@ public class ReservationServiceTest {
                 20.0, 6
         );
 
-        given(reservationRepository.findDateIntersection(any(), any())).willReturn(Optional.of(reservation2));
+        given(reservationRepository.findDateIntersection(any(), any(), anyLong())).willReturn(Optional.of(reservation2));
 
         assertThatThrownBy(() -> reservationService.createReservation(reservation))
                 .isInstanceOf(ReservationRequestException.class);
@@ -104,7 +105,7 @@ public class ReservationServiceTest {
                 20.0, 6
         );
 
-        given(reservationRepository.findDateIntersection(any(), any())).willReturn(Optional.of(reservation2));
+        given(reservationRepository.findDateIntersection(any(), any(), anyLong())).willReturn(Optional.of(reservation2));
 
         assertThatThrownBy(() -> reservationService.createReservation(reservation))
                 .isInstanceOf(ReservationRequestException.class);
@@ -123,7 +124,7 @@ public class ReservationServiceTest {
                 20.0, 6
         );
 
-        given(reservationRepository.findDateIntersection(any(), any())).willReturn(Optional.of(reservation2));
+        given(reservationRepository.findDateIntersection(any(), any(), anyLong())).willReturn(Optional.of(reservation2));
 
         assertThatThrownBy(() -> reservationService.createReservation(reservation))
                 .isInstanceOf(ReservationRequestException.class);
@@ -142,7 +143,7 @@ public class ReservationServiceTest {
                 20.0, 6
         );
 
-        given(reservationRepository.findDateIntersection(any(), any())).willReturn(Optional.of(reservation2));
+        given(reservationRepository.findDateIntersection(any(), any(), anyLong())).willReturn(Optional.of(reservation2));
 
         assertThatThrownBy(() -> reservationService.createReservation(reservation))
                 .isInstanceOf(ReservationRequestException.class);

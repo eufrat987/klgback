@@ -22,8 +22,9 @@ public interface ReservationRepository extends ListCrudRepository<Reservation, L
             SELECT TOP 1 * FROM RESERVATION r
             WHERE r.rent_start <= :end 
             AND :start <= r.rent_end
+            AND id != :id
             """, nativeQuery = true)
-    Optional<Reservation> findDateIntersection(@Param("start") LocalDate start, @Param("end") LocalDate end);
+    Optional<Reservation> findDateIntersection(@Param("start") LocalDate start, @Param("end") LocalDate end, @Param("id") long id);
 
     @Query(value = """
             SELECT count(*) as Count, SUM( DATEDIFF(day, rent_start, rent_end) + 1 ) as Days
