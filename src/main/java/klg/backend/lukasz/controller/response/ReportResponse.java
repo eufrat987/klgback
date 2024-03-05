@@ -16,10 +16,6 @@ public class ReportResponse {
     private Integer numOfProperties = 0;
     private Double profit = 0.0;
 
-    public void addToNumOfProperties(Integer value) {
-        numOfProperties += value;
-    }
-
     public void addToProfit(Double value) {
         profit += value;
     }
