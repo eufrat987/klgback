@@ -1,8 +1,6 @@
 package klg.backend.lukasz.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import klg.backend.lukasz.controller.response.ReportResponse;
-import klg.backend.lukasz.controller.view.View;
 import klg.backend.lukasz.model.Reservation;
 import klg.backend.lukasz.repository.queryresult.Report;
 import klg.backend.lukasz.repository.queryresult.ReportTenant;
@@ -24,7 +22,6 @@ public class ReservationController {
     ReservationService reservationService;
 
     @GetMapping
-    @JsonView(View.Internal.class)
     ResponseEntity<List<Reservation>> getReservations() {
         return new ResponseEntity<>(reservationService.getReservations(), HttpStatus.OK);
     }
@@ -64,13 +61,11 @@ public class ReservationController {
     }
 
     @PostMapping
-    @JsonView(View.Public.class)
     ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
         return new ResponseEntity<>(reservationService.createReservation(reservation), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    @JsonView(View.Public.class)
     ResponseEntity<Reservation> updateReservation(@PathVariable("id") long id, @RequestBody Reservation reservation) {
         return new ResponseEntity<>(reservationService.updateReservation(id, reservation), HttpStatus.OK);
     }

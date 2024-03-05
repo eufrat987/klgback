@@ -1,9 +1,7 @@
 package klg.backend.lukasz.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
-import klg.backend.lukasz.controller.view.View;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -24,7 +22,6 @@ public class Landlord {
     private long id;
 
     @NonNull
-    @JsonView(View.Internal.class)
     @Column(nullable = false)
     private String name;
 
