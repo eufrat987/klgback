@@ -3,8 +3,7 @@ package klg.backend.lukasz.controller;
 import klg.backend.lukasz.controller.request.ReservationRequest;
 import klg.backend.lukasz.controller.response.ReportResponse;
 import klg.backend.lukasz.model.Reservation;
-import klg.backend.lukasz.repository.queryresult.Report;
-import klg.backend.lukasz.repository.queryresult.ReportTenant;
+import klg.backend.lukasz.repository.queryresult.ReportPropertyQueryResult;
 import klg.backend.lukasz.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,10 +27,10 @@ public class ReservationController {
     }
 
     @GetMapping("/propertyReport/{id}")
-    ResponseEntity<Report> getPropertyReport(@PathVariable("id") long id,
-                                             @RequestParam("start")
+    ResponseEntity<ReportPropertyQueryResult> getPropertyReport(@PathVariable("id") long id,
+                                                                @RequestParam("start")
                                              @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-                                             @RequestParam("end")
+                                                                @RequestParam("end")
                                              @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return new ResponseEntity<>(
                 reservationService.getPropertyReport(startDate, endDate, id),
@@ -40,23 +39,12 @@ public class ReservationController {
     }
 
     @GetMapping("/tenantsReport")
-    ResponseEntity<List<ReportTenant>> getTenantsReport(@RequestParam("start")
-                                                        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-                                                        @RequestParam("end")
-                                                        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-        return new ResponseEntity<>(
-                reservationService.getTenantsReport(startDate, endDate),
-                HttpStatus.OK
-        );
-    }
-
-    @GetMapping("/tenantsReport2")
-    ResponseEntity<ReportResponse> getTenantsReport2(@RequestParam("start")
+    ResponseEntity<ReportResponse> getTenantsReport(@RequestParam("start")
                                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                                                      @RequestParam("end")
                                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return new ResponseEntity<>(
-                reservationService.getTenantsReport2(startDate, endDate),
+                reservationService.getTenantsReport(startDate, endDate),
                 HttpStatus.OK
         );
     }

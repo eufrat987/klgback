@@ -1,9 +1,8 @@
 package klg.backend.lukasz.repository;
 
 import klg.backend.lukasz.model.Reservation;
-import klg.backend.lukasz.repository.queryresult.Report;
-import klg.backend.lukasz.repository.queryresult.ReportTenant;
-import klg.backend.lukasz.repository.queryresult.ReportTenant2;
+import klg.backend.lukasz.repository.queryresult.ReportPropertyQueryResult;
+import klg.backend.lukasz.repository.queryresult.ReportTenantQueryResult;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +11,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -33,16 +31,7 @@ public interface ReservationRepository extends ListCrudRepository<Reservation, L
             AND rent_end <= :end 
             AND property_id = :id
             """, nativeQuery = true)
-    Optional<Report> getPropertyReport(@Param("start") LocalDate start, @Param("end") LocalDate end, @Param("id") long id);
-
-    @Query(value = """
-            SELECT t.name as TENANT, count(distinct r.PROPERTY_ID) AS PROPERTIES, sum(r.cost) AS PROFIT, sum(guests) as GUESTS
-            FROM reservation r
-            LEFT JOIN TENANT t on t.id = r.tenant_id
-            WHERE rent_start >= :start and rent_end <= :end
-            GROUP BY t.name
-            """, nativeQuery = true)
-    List<ReportTenant> getTenantReport(@Param("start") LocalDate start, @Param("end") LocalDate end);
+    Optional<ReportPropertyQueryResult> getPropertyReport(@Param("start") LocalDate start, @Param("end") LocalDate end, @Param("id") long id);
 
     @Query(value = """
             SELECT t.name  as TENANT, p.name as Property, sum(r.cost) AS PROFIT, sum(guests) as GUESTS
@@ -52,6 +41,6 @@ public interface ReservationRepository extends ListCrudRepository<Reservation, L
             WHERE rent_start >= :start and rent_end <= :end
             GROUP BY t.name, p.name	ORDER BY p.name
             """, nativeQuery = true)
-    Slice<ReportTenant2> getTenantReport2(@Param("start") LocalDate start, @Param("end") LocalDate end, Pageable pageable);
+    Slice<ReportTenantQueryResult> getTenantReport2(@Param("start") LocalDate start, @Param("end") LocalDate end, Pageable pageable);
 
 }
