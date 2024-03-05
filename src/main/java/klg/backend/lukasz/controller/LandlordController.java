@@ -1,5 +1,7 @@
 package klg.backend.lukasz.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import klg.backend.lukasz.controller.view.View;
 import klg.backend.lukasz.model.Landlord;
 import klg.backend.lukasz.model.Reservation;
 import klg.backend.lukasz.service.LandlordService;
@@ -20,16 +22,19 @@ public class LandlordController {
     LandlordService landlordService;
 
     @GetMapping
+    @JsonView(View.Internal.class)
     ResponseEntity<List<Landlord>> getLandlords() {
         return new ResponseEntity<>(landlordService.getLandlords(), HttpStatus.OK);
     }
 
     @GetMapping("/{name}/reservations")
+    @JsonView(View.Internal.class)
     ResponseEntity<List<Reservation>> getLandlordReservations(@PathVariable("name") String name) {
         return new ResponseEntity<>(landlordService.getLandlordReservations(name), HttpStatus.OK);
     }
 
     @PostMapping
+    @JsonView(View.Internal.class)
     ResponseEntity<Landlord> createLandlord(@RequestBody Landlord landlord) {
         return new ResponseEntity<>(landlordService.createLandlord(landlord), HttpStatus.OK);
     }

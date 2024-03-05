@@ -1,5 +1,7 @@
 package klg.backend.lukasz.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import klg.backend.lukasz.controller.view.View;
 import klg.backend.lukasz.model.Property;
 import klg.backend.lukasz.model.Reservation;
 import klg.backend.lukasz.service.PropertyService;
@@ -18,17 +20,20 @@ public class PropertyController {
     PropertyService propertyService;
 
     @GetMapping
+    @JsonView(View.Internal.class)
     ResponseEntity<List<Property>> getProperties() {
         return new ResponseEntity<>(propertyService.getProperties(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}/reservations")
+    @JsonView(View.Internal.class)
     ResponseEntity<List<Reservation>> getPropertyReservations(@PathVariable("id") long id) {
         return new ResponseEntity<>(propertyService.getPropertyReservations(id), HttpStatus.OK);
 
     }
 
     @PostMapping
+    @JsonView(View.Internal.class)
     ResponseEntity<Property> createProperty(@RequestBody Property property) {
         return new ResponseEntity<>(propertyService.createProperty(property), HttpStatus.OK);
     }
