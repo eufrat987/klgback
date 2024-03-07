@@ -18,20 +18,17 @@ import java.util.List;
 public class Property {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
     @NonNull
     @Column(nullable = false)
     private String name;
 
     @NonNull
     @Column(nullable = false, name = "unit_price")
-    private Double unitPrice; // todo ??
+    private Double unitPrice;
 
     @NonNull
     @Column(nullable = false)
-    private Integer surface; // todo ??
+    private Integer surface;
 
     @NonNull
     @Lob

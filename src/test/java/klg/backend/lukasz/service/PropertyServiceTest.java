@@ -19,7 +19,7 @@ public class PropertyServiceTest {
     @Test
     @Transactional
     public void whenFindingAllReservationByLandlord_thenCorrect() {
-        List<Reservation> reservations = propertyService.getPropertyReservations(1L);
+        List<Reservation> reservations = propertyService.getPropertyReservations("Dom nad jeziorem");
         assertThat(reservations.isEmpty()).isFalse();
     }
 

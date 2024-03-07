@@ -96,17 +96,17 @@ public class ReservationServiceImpl implements ReservationService {
 
     private void setForeignKeys(Reservation newReservation, Reservation reservationInDB) {
         if (newReservation.getLandlord() != null) {
-            var landlord = landlordRepository.findById(newReservation.getLandlord().getId())
+            var landlord = landlordRepository.findById(newReservation.getLandlord().getName())
                     .orElseThrow(EntityNotFoundException::new);
             reservationInDB.setLandlord(landlord);
         }
         if (newReservation.getTenant() != null) {
-            var tenant = tenantRepository.findById(newReservation.getTenant().getId())
+            var tenant = tenantRepository.findById(newReservation.getTenant().getName())
                     .orElseThrow(EntityNotFoundException::new);
             reservationInDB.setTenant(tenant);
         }
         if (newReservation.getProperty() != null) {
-            var property = propertyRepository.findById(newReservation.getProperty().getId())
+            var property = propertyRepository.findById(newReservation.getProperty().getName())
                     .orElseThrow(EntityNotFoundException::new);
             reservationInDB.setProperty(property);
         }

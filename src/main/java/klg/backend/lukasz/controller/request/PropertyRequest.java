@@ -9,7 +9,7 @@ import lombok.NonNull;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PropertyReqeust {
+public class PropertyRequest {
     @NonNull
     private String name;
     @NonNull

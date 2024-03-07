@@ -20,7 +20,7 @@ public class LandlordServiceImpl implements LandlordService {
     }
 
     public List<Reservation> getLandlordReservations(String name) {
-        return landlordRepository.findByName(name)
+        return landlordRepository.findById(name)
                 .map(Landlord::getReservations)
                 .orElseThrow(EntityNotFoundException::new);
     }

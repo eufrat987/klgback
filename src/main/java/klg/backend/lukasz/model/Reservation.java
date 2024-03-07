@@ -38,15 +38,15 @@ public class Reservation {
     private Integer guests;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "landlord_id", nullable = false)
+    @JoinColumn(name = "landlord", nullable = false)
     private Landlord landlord;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "property_id", nullable = false)
+    @JoinColumn(name = "property", nullable = false)
     private Property property;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "tenant_id", nullable = false) //todo can be in tenant diff?
+    @JoinColumn(name = "tenant", nullable = false) //todo can be in tenant diff?
     private Tenant tenant;
 
 }
