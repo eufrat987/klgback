@@ -3,9 +3,7 @@ package klg.backend.lukasz.service.impl;
 import jakarta.persistence.EntityNotFoundException;
 import klg.backend.lukasz.controller.response.ReportResponse;
 import klg.backend.lukasz.exception.ReservationRequestException;
-import klg.backend.lukasz.model.Landlord;
 import klg.backend.lukasz.model.Reservation;
-import klg.backend.lukasz.model.Tenant;
 import klg.backend.lukasz.repository.LandlordRepository;
 import klg.backend.lukasz.repository.PropertyRepository;
 import klg.backend.lukasz.repository.ReservationRepository;
@@ -20,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -51,7 +48,7 @@ public class ReservationServiceImpl implements ReservationService {
         Reservation reservationInDB = reservationRepository.findById(id)
                 .orElseThrow(EntityNotFoundException::new);
 
-        setForeignKeys(reservation, reservationInDB);
+        setForeignKeys(reservation, reservationInDB); // todo ?
         reservationInDB.setCost(reservation.getCost());
         reservationInDB.setRentStart(reservation.getRentStart());
         reservationInDB.setRentEnd(reservation.getRentEnd());
@@ -98,20 +95,16 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     private void setForeignKeys(Reservation newReservation, Reservation reservationInDB) {
-        String name = newReservation.getLandlord().getName();
-        var landlord = landlordRepository.findById(name);
-        if (landlord.isEmpty()) {
-            landlord = Optional.of(landlordRepository.save(new Landlord(name)));
+        if (newReservation.getLandlord() != null) {
+            var landlord = landlordRepository.findById(newReservation.getLandlord().getName())
+                    .orElseThrow(EntityNotFoundException::new);
+            reservationInDB.setLandlord(landlord);
         }
-        reservationInDB.setLandlord(landlord.get());
-
-        name = newReservation.getTenant().getName();
-        var tenant = tenantRepository.findById(name);
-        if (tenant.isEmpty()) {
-            tenant = Optional.of(tenantRepository.save(new Tenant(name)));
+        if (newReservation.getTenant() != null) {
+            var tenant = tenantRepository.findById(newReservation.getTenant().getName())
+                    .orElseThrow(EntityNotFoundException::new);
+            reservationInDB.setTenant(tenant);
         }
-        reservationInDB.setTenant(tenant.get());
-
         if (newReservation.getProperty() != null) {
             var property = propertyRepository.findById(newReservation.getProperty().getName())
                     .orElseThrow(EntityNotFoundException::new);
