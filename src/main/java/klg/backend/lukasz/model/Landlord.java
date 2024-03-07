@@ -14,13 +14,10 @@ import java.util.List;
 @RequiredArgsConstructor
 @Data
 @Entity
-@Table(name = "landlord", indexes = @Index(columnList = "name", unique = true))
+@Table(name = "landlord")
 public class Landlord {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
     @NonNull
     @Column(nullable = false)
     private String name;

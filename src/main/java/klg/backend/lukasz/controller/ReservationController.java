@@ -26,23 +26,23 @@ public class ReservationController {
         return new ResponseEntity<>(reservationService.getReservations(), HttpStatus.OK);
     }
 
-    @GetMapping("/propertyReport/{id}")
-    ResponseEntity<ReportPropertyQueryResult> getPropertyReport(@PathVariable("id") long id,
+    @GetMapping("/propertyReport/{name}")
+    ResponseEntity<ReportPropertyQueryResult> getPropertyReport(@PathVariable("name") String name,
                                                                 @RequestParam("start")
-                                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                                                @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                                                                 @RequestParam("end")
-                                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+                                                                @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return new ResponseEntity<>(
-                reservationService.getPropertyReport(startDate, endDate, id),
+                reservationService.getPropertyReport(startDate, endDate, name),
                 HttpStatus.OK
         );
     }
 
     @GetMapping("/tenantsReport")
     ResponseEntity<ReportResponse> getTenantsReport(@RequestParam("start")
-                                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-                                                     @RequestParam("end")
-                                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+                                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                                    @RequestParam("end")
+                                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return new ResponseEntity<>(
                 reservationService.getTenantsReport(startDate, endDate),
                 HttpStatus.OK

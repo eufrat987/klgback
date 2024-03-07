@@ -24,11 +24,11 @@ public class ReservationRequest {
     @NonNull
     private Integer guests;
     @NonNull
-    private Long landlord_id;
+    private String landlord;
     @NonNull
-    private Long tenant_id;
+    private String tenant;
     @NonNull
-    private Long property_id;
+    private String property;
 
     public Reservation map(Long id) {
         var reservation = map();
@@ -37,15 +37,15 @@ public class ReservationRequest {
     }
     public Reservation map() {
         Reservation reservation = new Reservation(rentStart, rentEnd, cost, guests);
-        var landlord = new Landlord();
-        landlord.setId(landlord_id);
-        var tenant = new Tenant();
-        tenant.setId(tenant_id);
-        var property = new Property();
-        property.setId(property_id);
-        reservation.setTenant(tenant);
-        reservation.setLandlord(landlord);
-        reservation.setProperty(property);
+        var landlordEntity = new Landlord();
+        landlordEntity.setName(landlord);
+        var tenantEntity = new Tenant();
+        tenantEntity.setName(tenant);
+        var propertyEntity = new Property();
+        propertyEntity.setName(property);
+        reservation.setTenant(tenantEntity);
+        reservation.setLandlord(landlordEntity);
+        reservation.setProperty(propertyEntity);
         return reservation;
     }
 }

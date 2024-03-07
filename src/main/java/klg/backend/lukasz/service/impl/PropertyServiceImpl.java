@@ -20,8 +20,8 @@ public class PropertyServiceImpl implements PropertyService {
         return propertyRepository.findAll();
     }
 
-    public List<Reservation> getPropertyReservations(long id) {
-        return propertyRepository.findById(id)
+    public List<Reservation> getPropertyReservations(String name) {
+        return propertyRepository.findById(name)
                 .map(Property::getReservations)
                 .orElseThrow(EntityNotFoundException::new);
     }

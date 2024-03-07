@@ -35,7 +35,7 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.findAll();
     }
 
-    @Transactional(isolation = Isolation.SERIALIZABLE) // test false ro for deadlock
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public Reservation createReservation(Reservation reservation) {
         validate(reservation);
         setForeignKeys(reservation, reservation);
@@ -56,8 +56,8 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.save(reservationInDB);
     }
 
-    public ReportPropertyQueryResult getPropertyReport(LocalDate start, LocalDate end, long id) {
-        return reservationRepository.getPropertyReport(start, end, id).orElseThrow(RuntimeException::new);
+    public ReportPropertyQueryResult getPropertyReport(LocalDate start, LocalDate end, String name) {
+        return reservationRepository.getPropertyReport(start, end, name).orElseThrow(RuntimeException::new);
     }
 
     public ReportResponse getTenantsReport(LocalDate start, LocalDate end) {
@@ -96,17 +96,17 @@ public class ReservationServiceImpl implements ReservationService {
 
     private void setForeignKeys(Reservation newReservation, Reservation reservationInDB) {
         if (newReservation.getLandlord() != null) {
-            var landlord = landlordRepository.findById(newReservation.getLandlord().getId())
+            var landlord = landlordRepository.findById(newReservation.getLandlord().getName())
                     .orElseThrow(EntityNotFoundException::new);
             reservationInDB.setLandlord(landlord);
         }
         if (newReservation.getTenant() != null) {
-            var tenant = tenantRepository.findById(newReservation.getTenant().getId())
+            var tenant = tenantRepository.findById(newReservation.getTenant().getName())
                     .orElseThrow(EntityNotFoundException::new);
             reservationInDB.setTenant(tenant);
         }
         if (newReservation.getProperty() != null) {
-            var property = propertyRepository.findById(newReservation.getProperty().getId())
+            var property = propertyRepository.findById(newReservation.getProperty().getName())
                     .orElseThrow(EntityNotFoundException::new);
             reservationInDB.setProperty(property);
         }

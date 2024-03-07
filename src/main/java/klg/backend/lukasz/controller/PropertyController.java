@@ -1,6 +1,5 @@
 package klg.backend.lukasz.controller;
 
-import klg.backend.lukasz.controller.request.PropertyReqeust;
 import klg.backend.lukasz.model.Property;
 import klg.backend.lukasz.model.Reservation;
 import klg.backend.lukasz.service.PropertyService;
@@ -23,15 +22,15 @@ public class PropertyController {
         return new ResponseEntity<>(propertyService.getProperties(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/reservations")
-    ResponseEntity<List<Reservation>> getPropertyReservations(@PathVariable("id") long id) {
-        return new ResponseEntity<>(propertyService.getPropertyReservations(id), HttpStatus.OK);
+    @GetMapping("/{name}/reservations")
+    ResponseEntity<List<Reservation>> getPropertyReservations(@PathVariable("name") String name) {
+        return new ResponseEntity<>(propertyService.getPropertyReservations(name), HttpStatus.OK);
 
     }
 
     @PostMapping
-    ResponseEntity<Property> createProperty(@RequestBody PropertyReqeust property) {
-        return new ResponseEntity<>(propertyService.createProperty(property.map()), HttpStatus.OK);
+    ResponseEntity<Property> createProperty(@RequestBody Property property) {
+        return new ResponseEntity<>(propertyService.createProperty(property), HttpStatus.OK);
     }
 
 }

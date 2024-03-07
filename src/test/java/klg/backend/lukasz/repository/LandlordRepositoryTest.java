@@ -19,8 +19,8 @@ public class LandlordRepositoryTest {
 
     @Test
     public void whenFindingCustomerById_thenCorrect() {
-        assertThat(landlordRepository.findById(1L)).isInstanceOf(Optional.class);
-        assertThat(landlordRepository.findById(1L).isPresent()).isEqualTo(true);
+        assertThat(landlordRepository.findById("Bruce Wayne")).isInstanceOf(Optional.class);
+        assertThat(landlordRepository.findById("Bruce Wayne").isPresent()).isEqualTo(true);
     }
 
     @Test
