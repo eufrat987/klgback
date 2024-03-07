@@ -25,19 +25,19 @@ public interface ReservationRepository extends ListCrudRepository<Reservation, L
     Optional<Reservation> findDateIntersection(@Param("start") LocalDate start, @Param("end") LocalDate end, @Param("id") long id);
 
     @Query(value = """
-            SELECT count(*) as Count, SUM( DATEDIFF(day, rent_start, rent_end) + 1 ) as Days
-            FROM RESERVATION 
+            SELECT count(*) as NumOfReservations, SUM( DATEDIFF(day, rent_start, rent_end) + 1 ) as BusyDays
+            FROM RESERVATION
             WHERE rent_start >= :start 
             AND rent_end <= :end 
-            AND property_id = :id
+            AND property = :property_name
             """, nativeQuery = true)
-    Optional<ReportPropertyQueryResult> getPropertyReport(@Param("start") LocalDate start, @Param("end") LocalDate end, @Param("id") long id);
+    Optional<ReportPropertyQueryResult> getPropertyReport(@Param("start") LocalDate start, @Param("end") LocalDate end, @Param("property_name") String name);
 
     @Query(value = """
-            SELECT t.name  as TENANT, p.name as Property, sum(r.cost) AS PROFIT, sum(guests) as GUESTS
+            SELECT t.name as TENANT, p.name as Property, sum(r.cost) AS PROFIT, sum(guests) as GUESTS
             FROM reservation r
-            LEFT JOIN TENANT t on t.id = r.tenant_id
-            LEFT join PROPERTY p on p.id = r.property_id
+            LEFT JOIN TENANT t on t.name = r.tenant
+            LEFT JOIN PROPERTY p on p.name = r.property
             WHERE rent_start >= :start and rent_end <= :end
             GROUP BY t.name, p.name	ORDER BY p.name
             """, nativeQuery = true)

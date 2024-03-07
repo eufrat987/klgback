@@ -1,6 +1,5 @@
 package klg.backend.lukasz.controller;
 
-import klg.backend.lukasz.controller.request.TenantRequest;
 import klg.backend.lukasz.model.Tenant;
 import klg.backend.lukasz.service.TenantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,8 @@ public class TenantController {
     }
 
     @PostMapping
-    ResponseEntity<Tenant> createProperty(@RequestBody TenantRequest tenant) {
-        return new ResponseEntity<>(tenantService.createTenant(tenant.map()), HttpStatus.OK);
+    ResponseEntity<Tenant> createProperty(@RequestBody Tenant tenant) {
+        return new ResponseEntity<>(tenantService.createTenant(tenant), HttpStatus.OK);
     }
 
 }

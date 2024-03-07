@@ -13,6 +13,6 @@ public interface ReservationService {
     public List<Reservation> getReservations();
     public Reservation createReservation(Reservation reservation);
     public Reservation updateReservation(long id, Reservation reservation);
-    public ReportPropertyQueryResult getPropertyReport(LocalDate start, LocalDate end, long id);
+    public ReportPropertyQueryResult getPropertyReport(LocalDate start, LocalDate end, String name);
     public ReportResponse getTenantsReport(LocalDate start, LocalDate end);
 }

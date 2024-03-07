@@ -1,6 +1,5 @@
 package klg.backend.lukasz.controller;
 
-import klg.backend.lukasz.controller.request.PropertyRequest;
 import klg.backend.lukasz.model.Property;
 import klg.backend.lukasz.model.Reservation;
 import klg.backend.lukasz.service.PropertyService;
@@ -30,8 +29,8 @@ public class PropertyController {
     }
 
     @PostMapping
-    ResponseEntity<Property> createProperty(@RequestBody PropertyRequest property) {
-        return new ResponseEntity<>(propertyService.createProperty(property.map()), HttpStatus.OK);
+    ResponseEntity<Property> createProperty(@RequestBody Property property) {
+        return new ResponseEntity<>(propertyService.createProperty(property), HttpStatus.OK);
     }
 
 }
